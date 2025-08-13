@@ -33,9 +33,8 @@ const App = () => {
                                 <option value="宜蘭縣">宜蘭縣</option>
                             </select>
                         </div>
-
-
                     </div>
+
                     <div className="newsCardWarp">
                         <div className="newsCard">
                             <div className="labledate">
@@ -84,7 +83,6 @@ const App = () => {
                     </div>
                     <div> 頁碼區 </div>
                 </div>
-
 
                 <div className="discount">
                     <div >
