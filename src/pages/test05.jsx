@@ -130,15 +130,6 @@ const App = () => {
                                 alt="" />
                         </div>
                     </div>
-
-                    <div className="row">
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corporis ipsum, ullam nostrum atque labore
-                            aperiam neque asperiores aut doloribus alias.</p>
-                    </div>
-                    <div className="row">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui odit hic aut eaque adipisci labore libero
-                            voluptatem impedit repudiandae ratione?</p>
-                    </div>
                 </div>
             </div>
         </>
