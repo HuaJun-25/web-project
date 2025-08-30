@@ -45,6 +45,7 @@ img {
     font-weight: 400;
     color: #d51e49;
     text-align: center;
+    position: relative;
 }
 
 .wecontent {

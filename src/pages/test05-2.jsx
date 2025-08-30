@@ -86,6 +86,7 @@ export default function WeContentSection() {
     };
   }, []);
 
+
   return (
     <>
       <div className="header">
