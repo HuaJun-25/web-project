@@ -4,7 +4,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    
+
 }
 
 .sliderimginner {
@@ -18,9 +18,11 @@
     overflow: hidden;
     justify-content: center;
     gap: 20px;
-    user-select: none;  /* 取消選取 */
+    user-select: none;
+    /* 取消選取 */
     align-items: flex-end;
-    flex-direction: row-reverse; /* 反轉 */
+    flex-direction: row-reverse;
+    /* 反轉 */
     padding-top: 10%;
     margin-left: -60%;
     transform: translateY(-50px);
@@ -32,12 +34,38 @@
     height: 80vh;
     width: 300px;
     position: relative;
+    opacity: 0.6;
+    transition: opacity 1.2s ease;
 }
+
+.selimg.fadein {
+    opacity: 1;
+}
+
+.selimg:hover img {
+    transform: scale(1.05);
+    transition: transform 0.5s ease;
+}
+
 
 .nonsel {
     height: 45vh;
     width: 150px;
     cursor: pointer;
+    opacity: 0.5;
+    overflow: hidden;
+}
+
+.nonsel img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    transform: scale(1.3);
+    transition: transform 0.5s ease;
+}
+
+.nonsel:hover img {
+    transform: scale(1);
 }
 
 .sliderimg {
@@ -45,6 +73,7 @@
     width: auto;
     object-fit: cover;
 }
+
 .slidertxt {
     flex: 1;
     position: absolute;
