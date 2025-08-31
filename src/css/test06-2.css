@@ -11,20 +11,54 @@
     width: 100%;
     height: 100vh;
     background-color: rgb(237, 232, 226);
+    user-select: none;
 }
 
 .sliderwrap {
-    display: flex;
-    overflow: hidden;
-    justify-content: center;
-    gap: 20px;
-    user-select: none;  /* 取消選取 */
-    align-items: flex-end;
-    flex-direction: row-reverse; /* 反轉 */
-    padding-top: 10%;
-    margin-left: -60%;
-    transform: translateY(-50px);
-    position: relative;
+    padding-top: 10vh;
+    /* margin-left: -20%; */
+
+}
+
+.swiper-wrapper {
+  display: flex;
+  align-items: flex-end; /* 底部對齊 */
+  /* justify-content: right; */
+}
+
+.swiper-slide {
+  width: 300px;           /* 中間圖片尺寸 */
+  height: 80vh;
+  transition: all 0.5s ease;
+}
+
+/* Slide 容器控制尺寸切換 */
+.slide {
+  width: 150px;
+  height: 45vh;
+  transition: width 0.8s ease, height 0.8s ease; /* ✅ 緩慢動畫 */
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  
+}
+
+.slide.selected {
+  width: 300px;
+  height: 80vh;
+}
+
+/* 只讓圖片跟著容器變化 */
+.slide .img-box {
+  width: 100%;
+  height: 100%;
+}
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 
@@ -38,12 +72,14 @@
     height: 45vh;
     width: 150px;
     cursor: pointer;
+    
 }
 
 .sliderimg {
     height: 100%;
     width: auto;
     object-fit: cover;
+
 }
 .slidertxt {
     flex: 1;
@@ -53,6 +89,8 @@
     left: 100%;
     margin-left: 20px;
     display: flex;
+    flex-direction: column;
+    text-align: left;
 }
 
 .slidertxt h3 {

@@ -1,6 +1,7 @@
 import '../css/test06.css'
 import { useState, useRef, useEffect } from 'react'
 import gsap from "gsap";
+import { Flip } from "gsap/Flip";
 import { IoMdArrowDroprightCircle } from "react-icons/io";
 import cimg1 from '../image/testt/slider1.webp'
 import cimg2 from '../image/testt/slider2.webp'
@@ -43,17 +44,40 @@ const App = () => {
             desc: "Description1",
         },
     ]);
+    const itemsRef = useRef([]);
+    useEffect(() => {
+        itemsRef.current.forEach((el, index) => {
+            if (el) {
+                gsap.set(el, { x: index * 100 }); // 根據 index 設定初始位置
+            }
+        });
+    }, [ImageArr]);
 
+    // 按箭頭下一張
+    
     const sliderforward = () => {
-       // setSelectedIndex(prev => Math.min(prev + 1, ImageArr.length - 1));
         const data = ImageArr[0];
         setImageArr([...ImageArr, data]);
         setImageArr((prevArr) => {
             const newArr = [...prevArr];
             newArr.shift();
             return newArr;
-        })
+        });
     }
+
+    // 按圖片切換
+    
+    const moveToFront = (index) => {
+        setImageArr((prevArr) => {
+            const newArr = [...prevArr];
+            //const selected = newArr.splice(index, 1)[0]; // 把點擊到的圖片取出
+            // newArr.unshift(selected); // 插到最前面
+            const head = newArr.slice(0, index); // 切出 index 之後 (含 index 本身) 的部分
+            const tail = newArr.slice(index); // 把 tail 接到 head 後面
+            return [...tail, ...head];
+        });
+    };
+
 
 
 
@@ -63,7 +87,9 @@ const App = () => {
                 <div className='sliderwrap' >
                     {ImageArr.map((item, index) => {
                         return (
-                            <div key={index} className={(index === 0) ? 'selimg' : 'nonsel'} onClick={() => setSelectedIndex(index)}>
+                            <div key={index}
+                                // ref={(el) => (itemsRef.current[index] = el)}
+                                className={(index === 0) ? 'selimg' : 'nonsel'} onClick={() => moveToFront(index)}>
                                 <img className='sliderimg' src={item.ImgSrc} />
                                 <div className="slidertxt">
                                     {(index === 0) ?
