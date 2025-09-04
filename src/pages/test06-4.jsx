@@ -85,8 +85,8 @@ const App = () => {
         if (sel) {
             gsap.fromTo(
                 sel,
-                { scale: 0.6, x: -150 }, // 起始狀態 (像 nonsel)
-                { scale: 1, x: 0, duration: 1, ease: "power2.inOut" } // 目標狀態
+                { scale: 0.6, x: -200, y: 100 }, // 起始狀態 (像 nonsel)
+                { scale: 1, x: 0, y:0, duration: 1, ease: "power2.inOut" } // 目標狀態
             );
         }
     }, [images]);
