@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            height: 600vh;
+            width: 100vw;
+            background-color: black;
+            overflow-x: hidden;
+        }
+
+        .slider-section {
+            height: 22vh;
+            bottom: 0;
+            position: fixed;
+            width: 100%;
+        }
+
+        .wheel {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 300vw;
+            height: 300vw;
+            max-width: 2000px;
+            max-height: 2000px;
+        }
+
+        .wheel-card {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 12%;
+            max-width: 300px;
+            aspect-ratio: 1/1;
+            cursor: pointer;
+        }
+
+        img {
+            width: 100%;
+            pointer-events: none;
+            z-index: 3;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="slider-section">
+        <div class="wheel">
+            <div class="whell-card"><img
+                    src="https://www.pokemon-tcg-pocket-dex.com/img/cardGroups/GeneticApex/GeneticApex_30_00084.webp"
+                    alt=""></div>
+            <div class="whell-card"><img
+                    src="https://www.pokemon-tcg-pocket-dex.com/img/cardGroups/GeneticApex/GeneticApex_30_00195.webp"
+                    alt=""></div>
+            <div class="whell-card"><img
+                    src="https://www.pokemon-tcg-pocket-dex.com/img/cardGroups/GeneticApex/GeneticApex_30_00047.webp"
+                    alt=""></div>
+            <div class="whell-card"><img
+                    src="https://www.pokemon-tcg-pocket-dex.com/img/cardGroups/MythicalIsland/cPK_20_002450_01_MEWex_SAR_M_M_zh_TW.webp"
+                    alt=""></div>
+            <div class="whell-card"><img
+                    src="https://www.pokemon-tcg-pocket-dex.com/img/cardGroups/Space-timeSmackdown/cPK_20_003100_01_GOUKAZARUex_SAR_M_M_zh_TW.webp"
+                    alt=""></div>
+            <div class="whell-card"><img
+                    src="https://www.pokemon-tcg-pocket-dex.com/img/cardGroups/Space-timeSmackdown/cPK_20_003480_01_MUMARGIex_SAR_M_M_zh_TW.webp"
+                    alt=""></div>
+            <div class="whell-card"><img
+                    src="https://www.pokemon-tcg-pocket-dex.com/img/cardGroups/Space-timeSmackdown/cPK_20_003800_01_MANYULAex_SAR_M_M_zh_TW.webp"
+                    alt=""></div>
+            <div class="whell-card"><img
+                    src="https://www.pokemon-tcg-pocket-dex.com/img/cardGroups/TriumphantLight/cPK_20_004710_01_GABURIASex_SAR_M_zh_TW_UT.webp"
+                    alt=""></div>
+            <div class="whell-card"><img
+                    src="https://www.pokemon-tcg-pocket-dex.com/img/cardGroups/ShiningRivalry/cPK_20_005690_01_DEKANUCHANex_SAR_M_zh_TW_UT.webp"
+                    alt=""></div>
+            <div class="whell-card"><img
+                    src="https://www.pokemon-tcg-pocket-dex.com/img/cardGroups/ShiningRivalry/cPK_20_005410_01_PIKACHUex_SAR_M_zh_TW_UT.webp"
+                    alt=""></div>
+            <div class="whell-card"><img
+                    src="https://www.pokemon-tcg-pocket-dex.com/img/cardGroups/GeneticApex/GeneticApex_30_00084.webp"
+                    alt=""></div>
+            <div class="whell-card"><img
+                    src="https://www.pokemon-tcg-pocket-dex.com/img/cardGroups/GeneticApex/GeneticApex_30_00195.webp"
+                    alt=""></div>
+            <div class="whell-card"><img
+                    src="https://www.pokemon-tcg-pocket-dex.com/img/cardGroups/GeneticApex/GeneticApex_30_00047.webp"
+                    alt=""></div>
+            <div class="whell-card"><img
+                    src="https://www.pokemon-tcg-pocket-dex.com/img/cardGroups/MythicalIsland/cPK_20_002450_01_MEWex_SAR_M_M_zh_TW.webp"
+                    alt=""></div>
+            <div class="whell-card"><img
+                    src="https://www.pokemon-tcg-pocket-dex.com/img/cardGroups/Space-timeSmackdown/cPK_20_003100_01_GOUKAZARUex_SAR_M_M_zh_TW.webp"
+                    alt=""></div>
+            <div class="whell-card"><img
+                    src="https://www.pokemon-tcg-pocket-dex.com/img/cardGroups/Space-timeSmackdown/cPK_20_003480_01_MUMARGIex_SAR_M_M_zh_TW.webp"
+                    alt=""></div>
+            <div class="whell-card"><img
+                    src="https://www.pokemon-tcg-pocket-dex.com/img/cardGroups/Space-timeSmackdown/cPK_20_003800_01_MANYULAex_SAR_M_M_zh_TW.webp"
+                    alt=""></div>
+            <div class="whell-card"><img
+                    src="https://www.pokemon-tcg-pocket-dex.com/img/cardGroups/TriumphantLight/cPK_20_004710_01_GABURIASex_SAR_M_zh_TW_UT.webp"
+                    alt=""></div>
+            <div class="whell-card"><img
+                    src="https://www.pokemon-tcg-pocket-dex.com/img/cardGroups/ShiningRivalry/cPK_20_005690_01_DEKANUCHANex_SAR_M_zh_TW_UT.webp"
+                    alt=""></div>
+            <div class="whell-card"><img
+                    src="https://www.pokemon-tcg-pocket-dex.com/img/cardGroups/ShiningRivalry/cPK_20_005410_01_PIKACHUex_SAR_M_zh_TW_UT.webp"
+                    alt=""></div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/MotionPathPlugin.min.js"></script>
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+        
+        gsap.registerPlugin(MotionPathPlugin);
+        let wheel = document.querySelector('.wheel');
+        let images = document.querySelectorAll('.wheel-card');
+
+        function setup() {
+            let radius = wheel.offsetWidth / 2;
+            let center = wheel.offsetWidth / 2;
+            let total = images.length;
+            let slice = (2 * Math.PI) / total;
+
+            images.forEach((image, i) => {
+                let angle = i * slice;
+                let x = center + radius * Math.sin(angle);
+                let y = center - radius * Math.cos(angle);
+
+                gsap.set(image, {
+                    ratation: angle + 'red',
+                    xPercent: -50,
+                    yPercent: -50,
+                    x: x,
+                    y: y,
+                });
+            });
+        }
+
+        gsap.to('.wheel', {
+            rotate: 360,
+            ease: 'none',
+            duration: 1,
+            scrollTrigger: {
+                tragger: 'body',
+                start: 'top top',
+                end: 'bottom bottom',
+                scrub: 1,
+                snap: 1 / images.length,
+                invalidateOnRefresh: true,
+            },
+        });
+
+        setup();
+        window.addEventListener('resize', setup);
+    </script>
+
+</body>
+
+</html>

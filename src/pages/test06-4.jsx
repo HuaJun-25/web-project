@@ -8,6 +8,7 @@ import cimg2 from '../image/testt/slider2.webp'
 import cimg3 from '../image/testt/slider3.webp'
 import cimg4 from '../image/testt/slider4.webp'
 import cimg5 from '../image/testt/slider5.webp'
+import Cursor from '../components/Cursor.jsx'
 
 
 const App = () => {
@@ -96,6 +97,7 @@ const App = () => {
 
     return (
         <>
+        <Cursor />
             <div className="sliderimginner">
                 <div className='sliderwrap' ref={containerRef}>
                     <div className='slidercard'>
