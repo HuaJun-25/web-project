@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            height: 100vh;
+            width: 100vw;
+            background-color: #000;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        #image-track>.image {
+            width: 40vmin;
+            height: 56vmin;
+            object-fit: cover;
+            object-position: 100% 50%;
+        }
+
+        #image-track {
+            display: flex;
+            gap: 4vmin;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-100%, 50%);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="image-track" data-mousedown-at='0' data-prev-percentage="0">
+        <img class="image"
+            src="https://images.unsplash.com/photo-1756303018960-e5279e145963?q=80&w=838&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            draggable="false" alt="">
+        <img class="image"
+            src="https://images.unsplash.com/photo-1754079132758-5dfb65298934?q=80&w=2196&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            draggable="false" alt="">
+        <img class="image"
+            src="https://plus.unsplash.com/premium_photo-1755804993716-a3f19e419eaf?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            draggable="false" alt="">
+        <img class="image"
+            src="https://images.unsplash.com/photo-1756573187428-48ffc9557eb4?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            draggable="false" alt="">
+        <img class="image"
+            src="https://images.unsplash.com/photo-1754172111686-89a5782b18c6?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            draggable="false" alt="">
+        <img class="image"
+            src="https://images.unsplash.com/photo-1756680967556-26861e2c836b?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            draggable="false" alt="">
+        <img class="image"
+            src="https://images.unsplash.com/photo-1756768937629-febe4bf15fcf?q=80&w=1742&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            draggable="false" alt="">
+    </div>
+
+    <script>
+        const track = document.getElementById('image-track');
+
+        window.onmousedown = ((e) => {
+            track.dataset.mouseDownAt = e.clientX.toString();
+        });
+        /*
+                window.onmouseup = (() => {
+                    track.dataset.mouseDownAt = '0';
+                    track.dataset.prevPercentage = track.dataset.percentage;
+                });*/
+        /*
+                window.onmousemove = ((e) => {
+                    if (track.dataset.mouseDownAt === '0') return;
+                    const mouseDelta = parseFloat(track.dataset.mouseDownAt) - e.clientX;
+                    const maxDelta = window.innerWidth / 2;
+        
+                    const percentage = (mouseDelta / maxDelta) * -100;
+                    const nextPercentagecc = parseFloat(track.dataset.prevPercentage) - percentage;
+                    const nextPercentage = Math.max(Math.min(nextPercentagecc, 0), -100);
+                    Math.min(nextPercentage, 0); Math.max(nextPercentage, -100);
+        
+                    console.log(Math.min(nextPercentage, 0));
+                    track.dataset.percentage = nextPercentage;
+                    track.style.transform = `translate(${nextPercentage}%, -50%)`;
+                    track.animate({
+                        transform: `translate(${nextPercentage}%, -50%)`
+                    }, { duration: 1200, fill: 'forwards' })
+        
+        
+                    for (const image of track.getElementsByClassName('image')) {
+                        image.style.objectPosition = `${nextPercentage + 100}% 50%`;
+                        image.animate({
+                            objectPosition: `${nextPercentage + 100}% center`
+                        }, { duration: 1200, fill: 'forwards' })
+                    }
+                })*/
+
+
+        window.onmousemove = (e) => {
+            if (track.dataset.mouseDownAt === '0') return;
+
+            const mouseDelta = parseFloat(track.dataset.mouseDownAt) - e.clientX;
+            const maxDelta = window.innerWidth / 2;
+
+            const percentage = (mouseDelta / maxDelta) * -100;
+            const prevPercentage = parseFloat(track.dataset.prevPercentage) || 0; // 防止 NaN
+
+            const nextPercentageUnconstrained = prevPercentage + percentage;
+
+            // 限制範圍 -100 ~ 0
+            const nextPercentage = Math.max(Math.min(nextPercentageUnconstrained, 0), -100);
+
+            track.dataset.percentage = nextPercentage;
+
+            track.animate(
+                { transform: `translate(${nextPercentage}%, -50%)` },
+                { duration: 1200, fill: "forwards" }
+            );
+
+            for (const image of track.getElementsByClassName("image")) {
+                image.animate(
+                    { objectPosition: `${nextPercentage + 100}% center` },
+                    { duration: 1200, fill: "forwards" }
+                );
+            }
+        };
+
+    </script>
+
+
+</body>
+
+</html>

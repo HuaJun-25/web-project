@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/test10.css">
+</head>
+
+<body>
+    <div className="process-wrapper">
+        <div className="work">
+            <div className="work-left">
+                <div className="text">
+                    <div className="work-info">
+                        <h2>title</h2>
+                        <span>說明</span>
+                    </div>
+                    <div className="work-info">
+                        <h2>title</h2>
+                        <span>說明</span>
+                    </div>
+                    <div className="work-info">
+                        <h2>title</h2>
+                        <span>說明</span>
+                    </div>
+                </div>
+            </div>
+            <div className="work-right">
+                <div className="work-right-b1">
+                    <div className="work-photo">
+                        <div className="work-photo-item"><img
+                                src="https://images.unsplash.com/photo-1756303018960-e5279e145963?q=80&w=838&auto=format&fit=crop"
+                                alt="" /></div>
+                        <div className="work-photo-item"><img
+                                src="https://images.unsplash.com/photo-1756573187428-48ffc9557eb4?q=80&w=774&auto=format&fit=crop"
+                                alt="" /></div>
+                        <div className="work-photo-item"><img
+                                src="https://images.unsplash.com/photo-1754079132758-5dfb65298934?q=80&w=2196&auto=format&fit=crop"
+                                alt="" /></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function(){
+            'use strict';
+            gsap.registerPlugin(ScrollTrigger);
+
+            const lenis = new Lenis({
+                duration: 1.2
+            });
+            function raf(time) {
+                lenis.raf(time)
+                requestAnimationFrame(raf)
+            };
+
+            requestAnimationFrame(raf);
+            lenis.on('scroll', ScrollTrigger.update)
+
+            gsap.ticker.add((time)=>{
+                lenis.raf(time * 1000)
+            });
+
+            let workinfoitems = document.querySelectorAll('.work-photo-item');
+            workinfoitems.forEach(function(item, index){
+                item.style.zIndex = workinfoitems.length-index;
+            });
+
+            gsap.set('.work-photo-item',{
+                clipPath: function (){
+                    return 'Inset(0px 0px 0px 0px)'
+                }
+            });
+
+            const animate = gsap.to('.work-photo-item:not(:last-child)',{
+                clipPath: function (){
+                    return 'Inset(0px 0px 100% 0px)'
+                },
+                stagger: .5,
+                ease: 'none'
+            });
+
+            ScrollTrigger.create({
+                trigger: '.work',
+                start: 'top top',
+                end: 'bottom bottom',
+                animation: animation,
+                scrub: 1
+            });
+        })
+    </script>
+</body>
+
+</html>
