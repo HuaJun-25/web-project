@@ -22,7 +22,7 @@
   left: 20%;
   top: 50%;
   transform: translateY(-50%);
-  will-change: transform;
+  /* will-change: transform; */
 }
 
 .image-track .image {

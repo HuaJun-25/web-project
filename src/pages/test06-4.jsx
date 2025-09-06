@@ -97,7 +97,7 @@ const App = () => {
 
     return (
         <>
-        <Cursor />
+        {/* <Cursor /> */}
             <div className="sliderimginner">
                 <div className='sliderwrap' ref={containerRef}>
                     <div className='slidercard'>

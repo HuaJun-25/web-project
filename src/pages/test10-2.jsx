@@ -31,37 +31,49 @@ const App = () => {
         const track = trackRef.current;
         if (!wrapper || !track) return;
 
-        // 圖片內部移動
+        const scrollRef = { current: 0 }; // 儲存目前進度 (0 ~ 1)
+
+        // 更新 track 與內部圖片
         const updateTrackAndImages = (scrollValue) => {
             const leftPercent = 20 - scrollValue * 100;
-            gsap.to(track, { left: `${leftPercent}%`, duration: 0.5, ease: "power3.out" });
+            gsap.to(track, {
+                left: `${leftPercent}%`,
+                duration: 0.5,
+                ease: "power3.out"
+            });
 
             const imgs = track.getElementsByClassName("image");
             for (const img of imgs) {
                 gsap.to(img, {
                     objectPosition: `${100 - scrollValue * 100}% 50%`,
                     duration: 0.5,
-                    ease: "power3.out",
+                    ease: "power3.out"
                 });
             }
         };
 
-        // Wheel 控制
+        // track 寬度差值
+        const trackWidth2 = track.scrollWidth - wrapper.offsetWidth - 500;
 
-        const handleWheel = (e) => {
-            if (!track.contains(e.target)) return;
-            // if (!track) return;
-            e.preventDefault();
+        // ScrollTrigger 控制水平滾動
+        gsap.to(track, {
+            x: -trackWidth2,
+            ease: "none",
+            scrollTrigger: {
+                trigger: wrapper,
+                start: "top top",
+                end: () => `+=${trackWidth2 * 2}`,
+                scrub: 2,
+                pin: true,
+                anticipatePin: 1,
+                onUpdate: (self) => {
+                    scrollRef.current = self.progress; // progress: 0~1
+                    updateTrackAndImages(scrollRef.current);
+                }
+            }
+        });
 
-            scrollRef.current += e.deltaY * 0.0015;
-            scrollRef.current = Math.max(0, Math.min(scrollRef.current, 1));
-
-            updateTrackAndImages(scrollRef.current);
-        };
-        track.addEventListener("wheel", handleWheel, { passive: false });
-        
-
-        // Draggable 控制 
+        // Draggable 控制
         const trackWidth = track.scrollWidth - track.parentElement.offsetWidth;
         Draggable.create(track, {
             type: "x",
@@ -79,21 +91,12 @@ const App = () => {
             },
         });
 
-        return () => track.removeEventListener("wheel", handleWheel);
+        return () => {
+            ScrollTrigger.getAll().forEach(st => st.kill());
+            gsap.killTweensOf(track);
+        };
     }, []);
 
-   /* useEffect(() => {
-        const cursor = cursorRef.current;
-        const track = trackRef.current;
-        if (!cursor || !track) return;
-
-        const moveCursor = (e) => {
-            cursor.setHover(track.contains(e.target));
-        };
-
-        window.addEventListener("mousemove", moveCursor);
-        return () => window.removeEventListener("mousemove", moveCursor);
-    }, []);*/
 
     useEffect(() => {
         if (!workRef.current) return;
@@ -107,7 +110,7 @@ const App = () => {
         });
 
         // 設定初始 clipPath
-        gsap.set(items, {
+        gsap.set(".work-photo-item", {
             clipPath: "inset(0px 0px 0px 0px)"
         });
 
@@ -126,7 +129,7 @@ const App = () => {
         });
 
         // 建立動畫
-        const animation = gsap.to(items, {
+        const animation = gsap.to('.work-photo-item:not(:last-child)', {
             clipPath: "inset(0px 0px 100% 0px)",
             stagger: 0.5,
             ease: "none"
@@ -159,7 +162,7 @@ const App = () => {
                     ))}
                 </div>
             </div>
-             <div className="process-wrapper">
+            <div className="process-wrapper">
                 <div className="work" ref={workRef}>
                     <div className="work-left">
                         <div className="text">
@@ -188,7 +191,7 @@ const App = () => {
                         </div>
                     </div>
                 </div>
-            </div> 
+            </div>
         </>
     );
 }
